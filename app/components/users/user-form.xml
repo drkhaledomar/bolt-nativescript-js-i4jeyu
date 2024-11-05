@@ -1,0 +1,43 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="{{ isEdit ? 'Edit User' : 'Add User' }}">
+        <NavigationButton text="Cancel" tap="{{ onCancel }}" />
+        <ActionBar.actionItems>
+            <ActionItem text="Save" tap="{{ onSave }}" ios.position="right" />
+        </ActionBar.actionItems>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4 space-y-4">
+            <StackLayout class="form-group">
+                <Label text="Full Name" class="label" />
+                <TextField text="{{ name }}" hint="Enter full name" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Username" class="label" />
+                <TextField text="{{ username }}" hint="Enter username" 
+                          editable="{{ !isEdit }}" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group" visibility="{{ !isEdit ? 'visible' : 'collapsed' }}">
+                <Label text="Password" class="label" />
+                <TextField text="{{ password }}" hint="Enter password" secure="true" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Role" class="label" />
+                <ListPicker items="{{ roles }}" selectedIndex="{{ selectedRoleIndex }}" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Email" class="label" />
+                <TextField text="{{ email }}" hint="Enter email" keyboardType="email" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Phone" class="label" />
+                <TextField text="{{ phone }}" hint="Enter phone number" keyboardType="phone" class="input" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

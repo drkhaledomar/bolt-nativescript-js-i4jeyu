@@ -1,0 +1,38 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Summary Cards -->
+            <GridLayout columns="*, *" rows="auto" class="mb-4">
+                <StackLayout col="0" class="bg-green-100 p-4 m-1 rounded-lg">
+                    <Label text="Total Earnings" class="text-green-800" />
+                    <Label text="{{ totalEarnings | currency }}" class="text-2xl font-bold text-green-600" />
+                </StackLayout>
+                <StackLayout col="1" class="bg-yellow-100 p-4 m-1 rounded-lg">
+                    <Label text="Pending Payments" class="text-yellow-800" />
+                    <Label text="{{ pendingPayments | currency }}" class="text-2xl font-bold text-yellow-600" />
+                </StackLayout>
+            </GridLayout>
+
+            <!-- New Transaction Button -->
+            <Button text="+ New Transaction" tap="{{ onAddTransaction }}" class="btn-primary mb-4" />
+
+            <!-- Transactions List -->
+            <Label text="Recent Transactions" class="text-lg font-bold mb-2" />
+            <ListView items="{{ transactions }}" class="list-group">
+                <ListView.itemTemplate>
+                    <GridLayout columns="*, auto" class="list-group-item p-3">
+                        <StackLayout col="0">
+                            <Label text="{{ patient.name }}" class="font-semibold" />
+                            <Label text="{{ date }}" class="text-gray-600" />
+                            <Label text="{{ description }}" class="text-gray-600" />
+                        </StackLayout>
+                        <StackLayout col="1" horizontalAlignment="right">
+                            <Label text="{{ amount | currency }}" class="font-bold" />
+                            <Label text="{{ status }}" class="{{ status === 'paid' ? 'text-green-600' : 'text-yellow-600' }}" />
+                        </StackLayout>
+                    </GridLayout>
+                </ListView.itemTemplate>
+            </ListView>
+        </StackLayout>
+    </ScrollView>
+</Page>

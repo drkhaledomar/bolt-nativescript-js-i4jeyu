@@ -1,0 +1,17 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <GridLayout rows="auto, *">
+        <Button text="+ New Patient" tap="{{ onAddPatient }}" class="btn-primary m-2" row="0" />
+        <ListView items="{{ patients }}" row="1" itemTap="{{ onPatientTap }}" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="list-group-item p-3">
+                    <StackLayout col="0">
+                        <Label text="{{ name }}" class="text-lg font-semibold" />
+                        <Label text="{{ 'Age: ' + age }}" class="text-gray-600" />
+                        <Label text="{{ parentName }}" class="text-gray-500" />
+                    </StackLayout>
+                    <Label text="›" class="text-2xl text-gray-400" col="1" verticalAlignment="center" />
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

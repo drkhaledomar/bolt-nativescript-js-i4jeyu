@@ -1,0 +1,37 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar title="New Patient" class="action-bar">
+        <NavigationButton text="Cancel" android.systemIcon="ic_menu_close_clear_cancel" tap="{{ onCancel }}" />
+        <ActionItem ios.position="right" android.position="actionBar" text="Save" tap="{{ onSave }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4 space-y-4">
+            <Label text="Patient Information" class="text-lg font-bold" />
+            
+            <StackLayout class="form-group">
+                <Label text="Name" class="text-gray-600" />
+                <TextField text="{{ name }}" hint="Enter patient name" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Age" class="text-gray-600" />
+                <TextField text="{{ age }}" hint="Enter age" keyboardType="number" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Parent/Guardian Name" class="text-gray-600" />
+                <TextField text="{{ parentName }}" hint="Enter parent name" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Phone" class="text-gray-600" />
+                <TextField text="{{ phone }}" hint="Enter phone number" keyboardType="phone" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Address" class="text-gray-600" />
+                <TextView text="{{ address }}" hint="Enter address" class="input" height="100" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

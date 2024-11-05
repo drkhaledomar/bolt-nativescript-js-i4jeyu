@@ -1,0 +1,27 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="User Management">
+        <ActionBar.actionItems>
+            <ActionItem text="Add User" tap="{{ onAddUser }}" ios.position="right" />
+        </ActionBar.actionItems>
+    </ActionBar>
+
+    <GridLayout rows="auto, *">
+        <SearchBar hint="Search users..." text="{{ searchQuery }}" row="0" />
+        <ListView items="{{ filteredUsers }}" row="1" class="list-group">
+            <ListView.itemTemplate>
+                <GridLayout columns="*, auto" class="list-group-item p-4">
+                    <StackLayout col="0">
+                        <Label text="{{ name }}" class="font-bold text-lg" />
+                        <Label text="{{ username }}" class="text-gray-600" />
+                        <Label text="{{ role }}" class="text-blue-600 capitalize" />
+                    </StackLayout>
+                    <StackLayout col="1" orientation="horizontal">
+                        <Button text="Edit" tap="{{ $parent.onEditUser }}" class="btn-secondary m-1" />
+                        <Button text="Delete" tap="{{ $parent.onDeleteUser }}" class="btn-danger m-1" 
+                                visibility="{{ username === 'admin' ? 'collapsed' : 'visible' }}" />
+                    </StackLayout>
+                </GridLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

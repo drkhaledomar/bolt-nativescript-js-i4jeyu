@@ -1,0 +1,78 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Print Prescription">
+        <NavigationButton text="Back" tap="{{ onBack }}" />
+        <ActionBar.actionItems>
+            <ActionItem text="Print" tap="{{ onPrint }}" ios.position="right" />
+            <ActionItem text="Preview" tap="{{ onPreview }}" ios.position="right" />
+        </ActionBar.actionItems>
+    </ActionBar>
+
+    <ScrollView>
+        <StackLayout class="p-4">
+            <!-- Header Settings -->
+            <Label text="Header Settings" class="text-lg font-bold mb-2" />
+            <GridLayout rows="auto, auto" columns="*, *" class="mb-4">
+                <TextView text="{{ headerText }}" hint="Enter header text" row="0" col="0" colSpan="2" 
+                          height="100" class="input mb-2" />
+                <Button text="Load Logo" tap="{{ onLoadLogo }}" row="1" col="0" class="btn-secondary m-1" />
+                <Button text="Clear Logo" tap="{{ onClearLogo }}" row="1" col="1" class="btn-secondary m-1" />
+            </GridLayout>
+
+            <!-- Preview -->
+            <Label text="Preview" class="text-lg font-bold mb-2" />
+            <GridLayout class="bg-white border rounded-lg p-4 mb-4" rows="auto, auto, auto, *, auto">
+                <!-- Header -->
+                <StackLayout row="0" class="text-center mb-4">
+                    <Image src="{{ logoSource }}" height="60" visibility="{{ logoSource ? 'visible' : 'collapsed' }}" />
+                    <Label text="{{ headerText }}" textWrap="true" class="text-center" />
+                </StackLayout>
+
+                <!-- Patient Info -->
+                <GridLayout row="1" columns="*, *" rows="auto, auto, auto" class="mb-4">
+                    <Label text="Patient Name: {{ patient.name }}" row="0" col="0" />
+                    <Label text="Age: {{ patient.age }}" row="0" col="1" />
+                    <Label text="Date: {{ currentDate }}" row="1" col="0" />
+                    <Label text="File No: {{ patient.fileNumber }}" row="1" col="1" />
+                </GridLayout>
+
+                <!-- Medications Table -->
+                <GridLayout row="2" class="mb-4">
+                    <ListView items="{{ medications }}" height="{{ medications.length * 120 }}" >
+                        <ListView.itemTemplate>
+                            <GridLayout rows="auto, auto, auto" class="border-b p-2">
+                                <GridLayout row="0" columns="*, *, *">
+                                    <Label text="{{ tradeName }}" col="0" class="font-bold" />
+                                    <Label text="{{ scientificName }}" col="1" />
+                                    <Label text="{{ price }}" col="2" class="text-right" />
+                                </GridLayout>
+                                <GridLayout row="1" columns="*, *, *">
+                                    <Label text="{{ dose + ' ' + unit }}" col="0" />
+                                    <Label text="{{ frequency }}" col="1" />
+                                    <Label text="{{ route }}" col="2" />
+                                </GridLayout>
+                                <Label text="{{ remarks }}" row="2" class="text-gray-600" textWrap="true" />
+                            </GridLayout>
+                        </ListView.itemTemplate>
+                    </ListView>
+                </GridLayout>
+
+                <!-- Footer -->
+                <TextView text="{{ footerText }}" hint="Enter footer text" row="4" 
+                          height="100" class="input" />
+            </GridLayout>
+
+            <!-- Footer Settings -->
+            <Label text="Footer Settings" class="text-lg font-bold mb-2" />
+            <TextView text="{{ footerText }}" hint="Enter footer text" height="100" class="input mb-4" />
+
+            <!-- Print Settings -->
+            <Label text="Print Settings" class="text-lg font-bold mb-2" />
+            <GridLayout rows="auto, auto" columns="*, *" class="mb-4">
+                <Label text="Copies:" row="0" col="0" verticalAlignment="center" />
+                <TextField text="{{ copies }}" keyboardType="number" row="0" col="1" class="input" />
+                <Switch checked="{{ savePrintSettings }}" row="1" col="0" />
+                <Label text="Save settings for next time" row="1" col="1" />
+            </GridLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

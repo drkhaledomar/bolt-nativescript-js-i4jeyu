@@ -1,0 +1,42 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar title="New Prescription" class="action-bar">
+        <NavigationButton text="Cancel" android.systemIcon="ic_menu_close_clear_cancel" tap="{{ onCancel }}" />
+        <ActionItem ios.position="right" android.position="actionBar" text="Save" tap="{{ onSave }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4 space-y-4">
+            <Label text="Prescription Details" class="text-lg font-bold" />
+            
+            <StackLayout class="form-group">
+                <Label text="Patient" class="text-gray-600" />
+                <ListPicker items="{{ patientNames }}" selectedIndex="{{ selectedPatientIndex }}" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Medication" class="text-gray-600" />
+                <TextField text="{{ medication }}" hint="Enter medication name" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Dosage" class="text-gray-600" />
+                <TextField text="{{ dosage }}" hint="Enter dosage" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Frequency" class="text-gray-600" />
+                <TextField text="{{ frequency }}" hint="Enter frequency" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Duration" class="text-gray-600" />
+                <TextField text="{{ duration }}" hint="Enter duration" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Notes" class="text-gray-600" />
+                <TextView text="{{ notes }}" hint="Enter additional notes" class="input" height="100" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

@@ -1,0 +1,37 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <ActionBar title="New Transaction" class="action-bar">
+        <NavigationButton text="Cancel" android.systemIcon="ic_menu_close_clear_cancel" tap="{{ onCancel }}" />
+        <ActionItem ios.position="right" android.position="actionBar" text="Save" tap="{{ onSave }}" />
+    </ActionBar>
+    
+    <ScrollView>
+        <StackLayout class="p-4 space-y-4">
+            <Label text="Transaction Details" class="text-lg font-bold" />
+            
+            <StackLayout class="form-group">
+                <Label text="Patient" class="text-gray-600" />
+                <ListPicker items="{{ patientNames }}" selectedIndex="{{ selectedPatientIndex }}" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Amount" class="text-gray-600" />
+                <TextField text="{{ amount }}" hint="Enter amount" keyboardType="number" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Description" class="text-gray-600" />
+                <TextField text="{{ description }}" hint="Enter description" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Status" class="text-gray-600" />
+                <ListPicker items="{{ statusOptions }}" selectedIndex="{{ selectedStatusIndex }}" class="input" />
+            </StackLayout>
+
+            <StackLayout class="form-group">
+                <Label text="Date" class="text-gray-600" />
+                <DatePicker date="{{ date }}" class="input" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</Page>

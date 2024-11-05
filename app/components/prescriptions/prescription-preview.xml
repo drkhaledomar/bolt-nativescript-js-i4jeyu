@@ -1,0 +1,7 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Print Preview">
+        <NavigationButton text="Close" tap="{{ onClose }}" />
+    </ActionBar>
+    
+    <WebView src="{{ htmlContent }}" />
+</Page>

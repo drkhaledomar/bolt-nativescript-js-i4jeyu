@@ -1,0 +1,16 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd">
+    <GridLayout rows="auto, *">
+        <Button text="+ New Prescription" tap="{{ onAddPrescription }}" class="btn-primary m-2" row="0" />
+        <ListView items="{{ prescriptions }}" row="1" class="list-group">
+            <ListView.itemTemplate>
+                <StackLayout class="list-group-item p-3">
+                    <Label text="{{ patient.name }}" class="font-semibold" />
+                    <Label text="{{ medication }}" class="text-gray-800" />
+                    <Label text="{{ 'Dosage: ' + dosage }}" class="text-gray-600" />
+                    <Label text="{{ 'Frequency: ' + frequency }}" class="text-gray-600" />
+                    <Label text="{{ 'Duration: ' + duration }}" class="text-gray-600" />
+                </StackLayout>
+            </ListView.itemTemplate>
+        </ListView>
+    </GridLayout>
+</Page>

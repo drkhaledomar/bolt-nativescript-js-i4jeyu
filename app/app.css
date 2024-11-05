@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.action-bar {
+  background-color: #4F46E5;
+  color: white;
+}
+
+.tab-view {
+  selected-tab-text-color: #4F46E5;
+  android-selected-tab-highlight-color: #4F46E5;
+}
+
+.btn-primary {
+  background-color: #4F46E5;
+  color: white;
+  padding: 12;
+  border-radius: 8;
+}

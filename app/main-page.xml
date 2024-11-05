@@ -1,0 +1,42 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" navigatingTo="onNavigatingTo">
+    <ActionBar title="Pediatric Clinic" class="action-bar">
+        <ActionBar.titleView>
+            <GridLayout columns="*, auto">
+                <Label text="Pediatric Clinic" col="0" class="text-white font-bold" />
+                <Button text="Logout" tap="{{ onLogout }}" col="1" class="text-white" />
+            </GridLayout>
+        </ActionBar.titleView>
+    </ActionBar>
+
+    <GridLayout rows="auto, *">
+        <!-- User Info -->
+        <StackLayout row="0" class="p-2 bg-gray-100">
+            <Label text="{{ userName }}" class="font-bold" />
+            <Label text="{{ userRole }}" class="text-gray-600" />
+        </StackLayout>
+
+        <!-- Main Content -->
+        <TabView row="1" androidTabsPosition="bottom" selectedIndex="{{ selectedTabIndex }}">
+            <!-- Admin-only User Management Tab -->
+            <TabViewItem title="Users" visibility="{{ userRole === 'admin' ? 'visible' : 'collapsed' }}">
+                <Frame defaultPage="components/users/users-list" />
+            </TabViewItem>
+
+            <TabViewItem title="Patients" visibility="{{ userRole === 'admin' || userRole === 'doctor' || userRole === 'nurse' || userRole === 'receptionist' ? 'visible' : 'collapsed' }}">
+                <Frame defaultPage="components/patients/patients-list" />
+            </TabViewItem>
+
+            <TabViewItem title="Visits" visibility="{{ userRole === 'admin' || userRole === 'doctor' || userRole === 'nurse' ? 'visible' : 'collapsed' }}">
+                <Frame defaultPage="components/visits/visits-list" />
+            </TabViewItem>
+
+            <TabViewItem title="Prescriptions" visibility="{{ userRole === 'admin' || userRole === 'doctor' ? 'visible' : 'collapsed' }}">
+                <Frame defaultPage="components/prescriptions/prescriptions-list" />
+            </TabViewItem>
+
+            <TabViewItem title="Finance" visibility="{{ userRole === 'admin' || userRole === 'accountant' ? 'visible' : 'collapsed' }}">
+                <Frame defaultPage="components/finance/finance-dashboard" />
+            </TabViewItem>
+        </TabView>
+    </GridLayout>
+</Page>

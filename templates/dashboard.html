@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Pediatric Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="app" class="min-h-screen">
+        <nav class="bg-blue-600 text-white">
+            <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+                <h1 class="text-xl font-bold">Pediatric Clinic</h1>
+                <div class="flex items-center space-x-4">
+                    <span>[[ currentUser.name ]]</span>
+                    <a href="/logout" class="hover:text-gray-200">Logout</a>
+                </div>
+            </div>
+        </nav>
+
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">Total Patients</h3>
+                    <p class="text-3xl font-bold">[[ stats.patients ]]</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">Today's Visits</h3>
+                    <p class="text-3xl font-bold">[[ stats.visits ]]</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">Prescriptions</h3>
+                    <p class="text-3xl font-bold">[[ stats.prescriptions ]]</p>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h3 class="text-lg font-semibold mb-2">Pending Payments</h3>
+                    <p class="text-3xl font-bold">$[[ stats.pendingPayments ]]</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Recent Patients</h2>
+                    <div class="space-y-4">
+                        <div v-for="patient in patients" :key="patient.id" 
+                             class="border-b pb-2 last:border-0">
+                            <div class="font-semibold">[[ patient.name ]]</div>
+                            <div class="text-sm text-gray-600">
+                                Age: [[ patient.age ]] | Parent: [[ patient.parent_name ]]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h2 class="text-xl font-bold mb-4">Recent Visits</h2>
+                    <div class="space-y-4">
+                        <div v-for="visit in visits" :key="visit.id"
+                             class="border-b pb-2 last:border-0">
+                            <div class="font-semibold">[[ visit.patient_name ]]</div>
+                            <div class="text-sm text-gray-600">
+                                [[ visit.date ]] - [[ visit.diagnosis ]]
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue
+
+        createApp({
+            delimiters: ['[[', ']]'],
+            data() {
+                return {
+                    currentUser: {
+                        name: '{{ current_user.name }}',
+                        role: '{{ current_user.role }}'
+                    },
+                    stats: {
+                        patients: 0,
+                        visits: 0,
+                        prescriptions: 0,
+                        pendingPayments: 0
+                    },
+                    patients: [],
+                    visits: []
+                }
+            },
+            mounted() {
+                this.fetchPatients()
+                this.fetchVisits()
+            },
+            methods: {
+                async fetchPatients() {
+                    const response = await fetch('/api/patients')
+                    this.patients = await response.json()
+                    this.stats.patients = this.patients.length
+                },
+                async fetchVisits() {
+                    const response = await fetch('/api/visits')
+                    this.visits = await response.json()
+                    this.stats.visits = this.visits.filter(v => 
+                        v.date === new Date().toISOString().split('T')[0]
+                    ).length
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+</html>
